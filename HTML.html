@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal - Berean Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8e44ad;
+            --secondary: #3498db;
+            --accent: #2ecc71;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --text: #333;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background: linear-gradient(-40deg, #f1c40f, #8e44ad, #3498db, #9b59b6);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #7d3c98;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Info Section */
+        .info-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 60px 0;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+            font-size: 2.2rem;
+        }
+
+        .info-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .info-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Modules Section */
+        .modules-section {
+            padding: 60px 0;
+        }
+
+        .modules-section .section-title {
+            color: white;
+        }
+
+        .modules-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .module-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .module-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .module-card p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .module-card button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .module-card button:hover {
+            background-color: #7d3c98;
+        }
+
+        .module-card .professor {
+            margin-top: 10px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Offer Section */
+        .offer-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 60px 0;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .benefit-item h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 60px 0;
+        }
+
+        .testimonials-section .section-title {
+            color: white;
+        }
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .testimonial-text:before {
+            content: """;
+            font-size: 3rem;
+            color: var(--primary);
+            position: absolute;
+            left: -10px;
+            top: -15px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+            font-style: italic;
+            box-shadow: var(--shadow);
+        }
+
+        .quote-section p {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .quote-section a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .quote-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+        }
+
+        .whatsapp-button a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-button a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        .whatsapp-button i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            padding-right: 30px;
+        }
+
+        .modal-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-info img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal-details {
+            margin-bottom: 20px;
+        }
+
+        .modal-details p {
+            margin-bottom: 10px;
+        }
+
+        .modal-details strong {
+            color: var(--dark);
+        }
+
+        .modal ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal li {
+            margin-bottom: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .modules-container, .benefits, .testimonials-container, .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .modules-container, .benefits, .testimonials-container, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Berean Community</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#modules">Modules</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="http://wa.me/+79256428332" class="btn btn-secondary">Login</a>
+                    <a href="http://wa.me/+79256428332" class="btn btn-primary">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Study Theology for Free and Accessibly</h1>
+            <p>Join the Berean Community and deepen your biblical knowledge with our high-quality theological courses.</p>
+            <a href="#" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 30px;">Get Started Now</a>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">What is Theology and Why Study It?</h2>
+            <div class="info-content">
+                <p>Many people feel apprehensive when they hear the word "theology." They imagine complex concepts and inaccessible language. But theology, in its essence, is simply the study of God and divine matters.</p>
+                <p>At Berean Community, we believe that theological study should be accessible to all Christians, regardless of their academic background. Our method simplifies theological concepts, making them understandable and applicable to daily life.</p>
+                <p>The secret to healthy theology is learning the fundamentals clearly, correctly, and consistently - and that's exactly what we offer in our courses.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules-section" id="modules">
+        <div class="container">
+            <h2 class="section-title">Our Study Modules</h2>
+            <div class="modules-container">
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Introduction to Theology</h3>
+                    <p>Essential foundations to begin your theological studies</p>
+                    <button onclick="openModal('modal1')">Learn More</button>
+                    <span class="professor">Teacher Lemos</span>
+                </div>
+                
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-bible"></i></div>
+                    <h3>Bibliology</h3>
+                    <p>Study of the doctrine of the Holy Scriptures</p>
+                    <button onclick="openModal('modal2')">Learn More</button>
+                    <span class="professor">Teacher Lemos</span>
+                </div>
+
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-pray"></i></div>
+                    <h3>Doctrine of God the Father</h3>
+                    <p>Understanding the nature and attributes of the Triune God</p>
+                    <button onclick="openModal('modal3')">Learn More</button>
+                    <span class="professor">Teacher Mario</span>
+                </div>
+
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-cross"></i></div>
+                    <h3>Doctrine of Christ</h3>
+                    <p>Christology: the person and work of Jesus Christ</p>
+                    <button onclick="openModal('modal4')">Learn More</button>
+                    <span class="professor">Teacher Francisco</span>
+                </div>
+
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-dove"></i></div>
+                    <h3>Doctrine of the Holy Spirit</h3>
+                    <p>Pneumatology: the Holy Spirit in the believer's life</p>
+                    <button onclick="openModal('modal5')">Learn More</button>
+                    <span class="professor"> Teacher Francisco</span>
+                </div>
+
+                <div class="module-card">
+                    <div class="card-icon"><i class="fas fa-search"></i></div>
+                    <h3>Hermeneutics</h3>
+                    <p>Principles of biblical interpretation</p>
+                    <button onclick="openModal('modal6')">Learn More</button>
+                    <span class="professor"> Teacher Mario</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="offer-section" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Beyond Modules, What Do We Offer?</h2>
+            <div class="benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Active Community</h3>
+                    <p>Interact with other students, share questions and experiences in our exclusive forum.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-book-reader"></i>
+                    <h3>Reading Club</h3>
+                    <p>Participate in regular meetings to discuss fundamental theological works.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-file-download"></i>
+                    <h3>Support Materials</h3>
+                    <p>Access exclusive resources, articles, e-books and videos to deepen your studies.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Personalized Support</h3>
+                    <p>Clarify your doubts with our team of specialized tutors and professors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Students Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The Berean Community transformed my way of reading and understanding the Bible. The courses are accessible and profound at the same time.</p>
+                    <p class="testimonial-author">- Lemos Mario, Student</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As a pastor, I recommend the Berean Community to all members of my church. The quality of teaching is exceptional.</p>
+                    <p class="testimonial-author">- Pastor Mario Lemos</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I never imagined I could study theology in such a clear and practical way. The support materials are fantastic!</p>
+                    <p class="testimonial-author">- Francisco Lemos, Businessman</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The Berean Community's approach turned complex concepts into accessible teachings. My faith was deeply enriched.</p>
+                    <p class="testimonial-author">- Francisco Mario, Teacher</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container">
+            <p>"Now the Berean Jews were of more noble character than those in Thessalonica, for they received the message with great eagerness and examined the Scriptures every day to see if what Paul said was true."</p>
+            <p><strong>Acts 17:11 NIV</strong></p>
+            <a href="https://bereianosagrado.com.br/quem-sao-os-bereianos/" target="_blank">Learn more about the Bereans here</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Berean Community</h3>
+                    <p>Studying Scripture with excellence and accessibility.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#modules">Modules</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li><a href="#">Introduction to Theology</a></li>
+                        <li><a href="#">Bibliology</a></li>
+                        <li><a href="#">Doctrine of God</a></li>
+                        <li><a href="#">Doctrine of Christ</a></li>
+                        <li><a href="#">Hermeneutics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +244 924718596</li>
+                        <li><i class="fas fa-envelope"></i> contact@bereancommunity.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +79256428332</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Luanda, Angola</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Berean Community. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-button">
+        <a href="http://wa.me/+79256428332" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h2>Introduction to Theology</h2>
+            <div class="modal-info">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Introduction to Theology">
+                </div>
+                <div class="modal-details">
+                    <p><strong>Professor:</strong> Teacher Lemos</p>
+                    <p><strong>Duration:</strong> 6 weeks</p>
+                    <p><strong>Level:</strong> Beginner</p>
+                </div>
+            </div>
+            <p><strong>Description:</strong> This module presents the foundations of Christian theology, exploring its nature, methods, and main divisions. Students will be introduced to basic concepts that will serve as the foundation for subsequent theological studies.</p>
+            <p><strong>Syllabus:</strong></p>
+            <ul>
+                <li>What is theology and why study it</li>
+                <li>Divisions of systematic theology</li>
+                <li>Sources of theology: Bible, tradition, reason, and experience</li>
+                <li>Brief history of theological thought</li>
+                <li>Theology and practical Christian life</li>
+                <li>Basic tools for theological study</li>
+            </ul>
+            <div class="modal-actions">
+                <button class="btn btn-primary" style="width: 100%;">Enroll in this Module</button>
+                <button class="btn btn-secondary" style="width: 100%;">Download Complete Syllabus</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h2>Bibliology</h2>
+            <div class="modal-info">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Bibliology">
+                </div>
+                <div class="modal-details">
+                    <p><strong>Professor:</strong> Lemos</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+            </div>
+            <p><strong>Description:</strong> This course explores the doctrine of Scripture, covering inspiration, authority, inerrancy, canonicity, and interpretation principles.</p>
+            <p><strong>Syllabus:</strong></p>
+            <ul>
+                <li>Nature and inspiration of Scripture</li>
+                <li>Authority and inerrancy of the Bible</li>
+                <li>Formation of the biblical canon</li>
+                <li>Transmission and translation of biblical texts</li>
+                <li>Principles of biblical interpretation</li>
+                <li>Application of Scripture to contemporary life</li>
+            </ul>
+            <div class="modal-actions">
+                <button class="btn btn-primary" style="width: 100%;">Enroll in this Module</button>
+                <button class="btn btn-secondary" style="width: 100%;">Download Complete Syllabus</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission handling
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            if (button.textContent.includes('Enroll')) {
+                button.addEventListener('click', function() {
+                    alert('Enrollment feature will be available soon! The backend is being developed.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
