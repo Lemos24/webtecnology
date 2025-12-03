@@ -43,7 +43,6 @@
             padding: 0 20px;
         }
 
-        /* Header */
         header {
             background-color: rgba(44, 62, 80, 0.95);
             color: white;
@@ -330,7 +329,6 @@
             color: var(--dark);
         }
 
-        /* Quote Section */
         .quote-section {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 40px;
@@ -356,7 +354,6 @@
             text-decoration: underline;
         }
 
-        /* Footer */
         footer {
             background-color: rgba(44, 62, 80, 0.95);
             color: white;
@@ -425,7 +422,6 @@
             color: #aaa;
         }
 
-        /* WhatsApp Button */
         .whatsapp-button {
             position: fixed;
             bottom: 25px;
@@ -542,7 +538,6 @@
             margin-top: 25px;
         }
 
-        /* Responsiveness */
         @media (max-width: 992px) {
             .modules-container, .benefits, .testimonials-container, .footer-content {
                 grid-template-columns: repeat(2, 1fr);
@@ -774,7 +769,7 @@
                     <h3>Contact</h3>
                     <ul>
                         <li><i class="fas fa-phone"></i> +244 924718596</li>
-                        <li><i class="fas fa-envelope"></i> contact@bereancommunity.com</li>
+                        <li><i class="fas fa-envelope"></i> lemos92564@gmail.com</li>
                         <li><i class="fab fa-whatsapp"></i> +79256428332</li>
                         <li><i class="fas fa-map-marker-alt"></i> Luanda, Angola</li>
                     </ul>
@@ -863,7 +858,6 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Close modal when clicking outside content
         window.onclick = function(event) {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
@@ -873,7 +867,6 @@
             });
         }
 
-        // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -886,7 +879,6 @@
             });
         });
 
-        // Form submission handling
         document.querySelectorAll('.btn-primary').forEach(button => {
             if (button.textContent.includes('Enroll')) {
                 button.addEventListener('click', function() {
@@ -896,4 +888,5 @@
         });
     </script>
 </body>
+
 </html>
